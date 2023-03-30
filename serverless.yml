@@ -6,6 +6,20 @@ provider:
   name: aws
   runtime: nodejs12.x
 
+resources:
+  Resources:
+    myTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: serverless-rest-api
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
 functions:
   hello:
     handler: src/handler.hello
