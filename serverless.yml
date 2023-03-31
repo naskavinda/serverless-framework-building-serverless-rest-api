@@ -19,11 +19,33 @@ resources:
           - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
+    myLambdaRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: myLambdaRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: dynamoDBPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - dynamodb:PutItem
+                  Resource: arn:aws:dynamodb:us-east-1:724031429936:table/serverless-rest-api
 
 functions:
   hello:
-    handler: src/handler.hello
+    handler: src/userRegistration.handler
     events:
       - http:
           path: hello
-          method: get
+          method: post
+    role: myLambdaRole
