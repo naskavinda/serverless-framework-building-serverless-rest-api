@@ -1,0 +1,9 @@
+{
+  "name": "serverless-framework-building-serverless-rest-api",
+  "version": "1.0.0",
+  "description": "This is a simple guideline for how to implement rest api in Serverless manner",
+  "dependencies": {
+    "aws-sdk": "^2.1347.0",
+    "serverless-dynamodb-client": "0.0.2"
+  }
+}
