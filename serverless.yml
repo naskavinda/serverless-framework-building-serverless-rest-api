@@ -39,6 +39,7 @@ resources:
                 - Effect: Allow
                   Action:
                     - dynamodb:PutItem
+                    - dynamodb:Scan
                   Resource: arn:aws:dynamodb:us-east-1:724031429936:table/serverless-rest-api
 
 functions:
@@ -46,6 +47,13 @@ functions:
     handler: src/userRegistration.handler
     events:
       - http:
-          path: hello
+          path: user
           method: post
+    role: myLambdaRole
+  getUsers:
+    handler: src/getAllUserDetails.handler
+    events:
+      - http:
+          path: users
+          method: get
     role: myLambdaRole
